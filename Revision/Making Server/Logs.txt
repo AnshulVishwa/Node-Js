@@ -1,13 +1,1 @@
-Server Logs
-
-Request received on port /about	 at 1733523367785
-Request received on port /favicon.ico	 at 1733523367871
-Request received on port /	 at 1733523369892
-Request received on port /about	 at 1733523370896
-Request received on port /favicon.ico	 at 1733523370940
-Request received on port /	 at 1733523373779
-Request received on port /favicon.ico	 at 1733523373824
-Request received on port /about	 at 1733523384422
-Request received on port /favicon.ico	 at 1733523384467
-Request received on port /kk	 at 1733523390501
-Request received on port /favicon.ico	 at 1733523390547
+Request received on /Request received on /
