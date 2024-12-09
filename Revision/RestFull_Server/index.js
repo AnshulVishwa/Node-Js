@@ -1,12 +1,15 @@
+// Requiring Express, fs, and users
 const express = require("express")
-const app = express()
-const port = 8000
 const fs = require("fs")
 let users = require("./users.json")
+// Making an app and assigining port
+const app = express()
+const port = 8000
 
 // Middle Ware for url encoded
 app.use( express.urlencoded({extended:false}) )
 
+// App Route for /api/users
 app.route("/api/users")
 .get(( req , res ) => res.json(users) )
 .post(( req , res ) => {
@@ -17,6 +20,7 @@ app.route("/api/users")
     res.send("User Created Successfully")
 })
 
+// App Route for /api/users/:id
 app.route("/api/users/:id")
 .get(( req , res ) => {
     const id = Number(req.params.id);
@@ -54,7 +58,9 @@ app.route("/api/users/:id")
     res.json({ "status" : "Completed" })
 } )
 
-app.get("/users", (req, res) => {
+// App routes for /users
+app.route("/users")
+.get((req, res) => {
     res.send(`
         <div>
             ${
@@ -70,11 +76,11 @@ app.get("/users", (req, res) => {
              }    
         </div>
     `);
-});
-
-app.post("/users" , ( req , res ) => {
+})
+.post(( req , res ) => {
     users.push(req.body)
     res.send("Post Request Accepted")
 })
 
+// Establishing Server
 app.listen( port , () => console.log(`Server Started at port ${port}`) )
