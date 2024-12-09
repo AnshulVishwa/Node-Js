@@ -36,6 +36,20 @@ app.route("/api/users/:id")
     }
     res.json(users[id-1])
 })
+.patch( ( req , res ) => {
+    const id = Number(req.params.id)
+    const existingUser = users[id-1]
+    const updatedUser = {
+        id: `${id}`,
+        username: req.body.username || existingUser.username,
+        email: req.body.email || existingUser.email,
+        gender: req.body.gender || existingUser.gender,
+        ip_address: req.body.ip_address || existingUser.ip_address,
+    };
+    users[id-1] = updatedUser
+    res.json(updatedUser)
+} )
+
 
 app.get("/users", (req, res) => {
     res.send(`
