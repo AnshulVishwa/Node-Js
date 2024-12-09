@@ -24,6 +24,18 @@ app.route("/api/users/:id")
     const User = users.find( ( user ) => user.id == id )
     res.json(User)
 })
+.put(( req , res ) => {
+    const id = Number(req.params.id)
+    fs.appendFile( "./logs.txt" ,`Changed user data of id : ${id}\n` , (err)=>console.log(err))
+    users[id-1] = {
+        id : `${id}`,
+        username : `${req.body.username}`,
+        email : `${req.body.email}`,
+        gender : `${req.body.gender}`,
+        ip_address : `${req.body.ip_address}`
+    }
+    res.json(users[id-1])
+})
 
 app.get("/users", (req, res) => {
     res.send(`
