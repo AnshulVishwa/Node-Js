@@ -49,7 +49,10 @@ app.route("/api/users/:id")
     users[id-1] = updatedUser
     res.json(updatedUser)
 } )
-
+.delete( ( req , res ) => {
+    users = users.filter( (user) => user.id != req.params.id )
+    res.json({ "status" : "Completed" })
+} )
 
 app.get("/users", (req, res) => {
     res.send(`
