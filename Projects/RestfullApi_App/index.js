@@ -15,12 +15,12 @@ app.route("/")
 } )
 .post( ( req , res ) => {
     const body = req.body
-    const new_product = product.push( {
+    product.push( {
         "id" : product.length+1,
         ...body
     } )
 
-    return res.json( product[product.length+1] )
+    return res.json( {"Status" : "User Created"} )
 } )
 
 // Route for Specific Document
