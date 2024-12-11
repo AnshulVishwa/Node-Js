@@ -52,6 +52,10 @@ app.route("/products/:id")
 
     return res.json(product[id-1])
 } )
+.delete( ( req , res ) => {
+    product = product.filter( ( prod ) => prod.id != req.params.id )
+    res.json({ "Status" : "Updated" })
+} )
 
 // Establishing Server
 app.listen( port , () => console.log("Server Started at Port " + port) )
