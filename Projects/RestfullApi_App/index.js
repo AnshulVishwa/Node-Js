@@ -20,7 +20,7 @@ app.route("/")
         ...body
     } )
 
-    return res.json(new_product)
+    return res.json( product[product.length+1] )
 } )
 
 // Route for Specific Document
