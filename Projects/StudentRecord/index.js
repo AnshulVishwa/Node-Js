@@ -39,9 +39,10 @@ const Student = mongoose.model( "StudentDetail" , Scheme )
 app.route("/")
 .get( async ( req , res ) => {
     const result = await Student.find( {} )
-    await ( result.length == 0 )
-    ? res.status(400).json( { "Students" : "Not Found" } )
-    : res.status(200).json({ "Students" : result })
+    if( result.length == 0 )
+    res.status(400).json( { "Students" : "Not Found" } )
+    else
+    res.status(200).json({ "Students" : result })
 } )
 .post( async ( req , res ) => {
     const body = req.body
@@ -83,6 +84,28 @@ app.route("/:roll")
                 "Student" : result
             }
         ] )
+    }
+} )
+.patch( async ( req , res ) => {
+    const { name , roll , program , discipline } = req.body;
+    if( !roll ) res.status(400).json({"msg" : "Roll number is required of Student to update"})
+    else{
+        const result = await Student.updateOne( { roll } , { $set : { name , program , discipline } } )
+        if( result.matchedCount == 0 )
+            res.status(400).json( { "msg" : "No student found" } )
+        else
+            res.status(200).json({"status" : "updated"})
+    }
+} )
+.put( async ( req , res ) => {
+    const { name , roll , program , discipline } = req.body;
+    if( !roll || !name || !program || !discipline ) res.status(400).json({"msg" : "All fields are required"})
+    else{
+        const result = await Student.updateOne( { roll } , { $set : { name , program , discipline } } )
+        if( result.matchedCount == 0 )
+            res.status(400).json( { "msg" : "No student found" } )
+        else
+            res.status(200).json({"status" : "updated"})
     }
 } )
 // ====================================
