@@ -1,8 +1,6 @@
-GET Request Received on / at 1736141189047
-GET Request Received on /favicon.ico at 1736141189193
-GET Request Received on /list/student at 1736141202957
-GET Request Received on /favicon.ico at 1736141203028
-GET Request Received on /list at 1736141206734
-GET Request Received on /favicon.ico at 1736141206809
-GET Request Received on / at 1736141221489
-GET Request Received on /favicon.ico at 1736141221561
+Logs
+
+GET Request Received on / at 1736164165078
+GET Request Received on / at 1736164446329
+GET Request Received on / at 1736165114093
+GET Request Received on /630 at 1736165122195

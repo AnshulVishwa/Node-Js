@@ -7,7 +7,7 @@ const { ReqResLog , url_middleware } = require("./Middlewares/script")
 const { connectMongoDB } = require("./Database/connect")
 
 //Middlewares
-// app.use(ReqResLog("./Logs/logs.txt"))
+app.use(ReqResLog("./Logs/logs.txt"))
 app.use(url_middleware())
 
 // Connection
