@@ -69,22 +69,27 @@ app.route("/")
 
 app.route("/:roll")
 .get( async ( req , res ) => {
-    const roll = req.params.roll
-    const result = await Student.find({ roll })
-    console.log(result , "\t" , typeof(result))
-    if( result.length == 0 ){
-        res.status(400).json( {"Status" : "User not Found"} )
-    }
+    const roll = Number(req.params.roll)
+
+    if( isNaN(roll) ) res.status(400).json({"msg":"Invalid User"})
     else{
-        res.status(200).json( [
-            {
-                "Status" : "User Found"
-            },
-            {
-                "Student" : result
-            }
-        ] )
+        const result = await Student.find({ roll })
+        console.log(result , "\t" , typeof(result))
+        if( result.length == 0 ){
+            res.status(400).json( {"Status" : "User not Found"} )
+        }
+        else{
+            res.status(200).json( [
+                {
+                    "Status" : "User Found"
+                },
+                {
+                    "Student" : result
+                }
+            ] )
+        }
     }
+
 } )
 .put( async ( req , res ) => {
     const { name , roll , program , discipline } = req.body;
@@ -119,6 +124,34 @@ app.route("/:roll")
             res.status(200).json({ "msg" : "Student Deleted" })
     }
 } )
+
+app.get( "/list/student" , async ( req , res ) => {
+    const students = await Student.find({})
+    const html = `
+        <table>
+            <thead>
+                <tr>
+                    <th>Roll Number</th>
+                    <th>Student Name</th>
+                    <th>Program</th>
+                    <th>Discipline</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${ students.map( v => (
+                    `<tr>
+                        <td>${v.roll}</td>
+                        <td>${v.name}</td>
+                        <td>${v.program}</td>
+                        <td>${v.discipline}</td>
+                    </tr>`
+                )).join("") }
+            </tbody>
+        </table>
+    `
+    res.status(200).send(html)
+} )
+
 // ====================================
 
 // Server Route
