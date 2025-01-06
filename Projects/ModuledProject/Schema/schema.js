@@ -1,25 +1,23 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const Schema = mongoose.Schema( {
-    "name" : {
-        type : String,
-        required : true
+const schema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
     },
-    "roll" : {
-        type : Number,
-        required : true,
-        unique : true
+    roll: {
+        type: Number,
+        required: true,
+        unique: true
     },
-    "program" : {
-        type : String,
-        required : true
+    program: {
+        type: String,
+        required: true
     },
-    "discipline" : {
-        type : String,
-        required : true
+    discipline: {
+        type: String,
+        required: true
     }
-} )
+});
 
-module.exports = {
-    Schema
-}
+module.exports = schema;
