@@ -108,6 +108,17 @@ app.route("/:roll")
             res.status(200).json({"status" : "updated"})
     }
 } )
+.delete( async( req , res ) => {
+    const roll = req.body.roll
+    if( !roll ) res.status(400).json({"msg" : "Roll number is required of Student to update"})
+    else {
+        const result = await Student.deleteOne({roll})
+        if (result.matchedCount == 0)
+            res.status(400).json({ "msg" : "No student found" })
+        else 
+            res.status(200).json({ "msg" : "Student Deleted" })
+    }
+} )
 // ====================================
 
 // Server Route
