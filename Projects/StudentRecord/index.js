@@ -86,9 +86,9 @@ app.route("/:roll")
         ] )
     }
 } )
-.patch( async ( req , res ) => {
+.put( async ( req , res ) => {
     const { name , roll , program , discipline } = req.body;
-    if( !roll ) res.status(400).json({"msg" : "Roll number is required of Student to update"})
+    if( !roll || !name || !program || !discipline ) res.status(400).json({"msg" : "All fields are required"})
     else{
         const result = await Student.updateOne( { roll } , { $set : { name , program , discipline } } )
         if( result.matchedCount == 0 )
@@ -97,9 +97,9 @@ app.route("/:roll")
             res.status(200).json({"status" : "updated"})
     }
 } )
-.put( async ( req , res ) => {
+.patch( async ( req , res ) => {
     const { name , roll , program , discipline } = req.body;
-    if( !roll || !name || !program || !discipline ) res.status(400).json({"msg" : "All fields are required"})
+    if( !roll ) res.status(400).json({"msg" : "Roll number is required of Student to update"})
     else{
         const result = await Student.updateOne( { roll } , { $set : { name , program , discipline } } )
         if( result.matchedCount == 0 )
