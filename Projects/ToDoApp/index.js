@@ -8,8 +8,8 @@ const PORT = 9000;
 
 app.use(express.json());
 
+app.use("/task", TaskRoute);
 app.use("/", HomeRoute);
-app.use("/allTasks/:user", TaskRoute);
 
 connectToMongoDB("mongodb://127.0.0.1:27017/ToDoApp")
     .then(() => console.log("MongoDB connected"))
