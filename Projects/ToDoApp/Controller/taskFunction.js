@@ -4,11 +4,15 @@ async function handlePostTask(req, res){
     const user = req.params.user
     const newtask = req.body.newtask
     if( !user ) return res.send("User is required")
-    const validateDuplicate = await TODO.findOne({"tasks" : { newtask }}) 
-    console.log(validateDuplicate)
-    if( validateDuplicate ) return res.status(400).json( { "error" : "Task already occured" } )
-    const result = await TODO.findOneAndUpdate({"username" : user } , {$push : {tasks : newtask}})
-    res.send(result)
+
+    const validateDuplicate = await TODO.findOne({ tasks: newtask });
+ 
+    if (validateDuplicate) {
+        return res.status(400).json({ error: "Task already exists" });
+    }
+    
+    await TODO.findOneAndUpdate({"username" : user } , {$push : {tasks : `${req.body.newtask}`}})
+    res.status(200).send(await TODO.findOne({"username" : user }))
 }
 
 async function handleGetAllTasks(req, res) {
@@ -39,9 +43,20 @@ async function PostCompletedTasks( req , res ) {
     res.json({"status" : "Tasks Updated"})
 }
 
+async function handleReqResDeleteTask( req , res ) {
+    const { user , task } = req.params
+    const validateUser = await TODO.findOne({"username" : user})
+    if( !validateUser ) res.status(400).json({"msg" : "User Not Found"})
+    const validateTask = await TODO.findOne({"username" : user}).tasks
+    if( validateTask.length < task ) res.status(400).json({"msg" : "Task Not Found"})
+    await TODO.updateOne( { "username" : user } , { $pull : { "tasks" : validateTask[task] } } )
+    res.status(200).json( { "status" : "Deleted Successfully" } )
+}
+
 module.exports = {
     handleGetAllTasks,
     handlePostTask,
     handleReqResCompletedTasks,
-    PostCompletedTasks
+    PostCompletedTasks,
+    handleReqResDeleteTask
 };
