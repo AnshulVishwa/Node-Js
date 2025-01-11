@@ -30,7 +30,7 @@ async function handleGetReqFromID( req , res ){
 
 async function handlePatchReqRes( req , res ) {
     const prev = req.body.username
-    const newname = req.body.new
+    const newname = req.body.newname
     if( !prev ) return res.status(200).json({"error" : "No username given"})
     if( !newname ) return res.status(200).json({"error" : "No new username given"})
     const result = await TODO.findOneAndUpdate({username : prev} , {$set:{username : newname}})

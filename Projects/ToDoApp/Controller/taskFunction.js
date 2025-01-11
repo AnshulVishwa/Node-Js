@@ -45,10 +45,11 @@ async function PostCompletedTasks( req , res ) {
 
 async function handleReqResDeleteTask( req , res ) {
     let { user , task } = req.params
+    task--
     const validateUser = await TODO.findOne({"username" : user})
     if( !validateUser ) res.status(400).json({"msg" : "User Not Found"})
     const validateTask = await TODO.findOne({"username" : user})
-    const toDeleteTask = validateTask.tasks[++task]
+    const toDeleteTask = validateTask.tasks[task]
     if( validateTask.tasks.length < task ) res.status(400).json({"msg" : "Task Not Found"})
     await TODO.updateOne( { "username" : user } , { $pull : { "tasks" : toDeleteTask } } )
     await TODO.updateOne( { "username" : user } , { $set : { "RecentlyDeletedTask" : toDeleteTask } } )

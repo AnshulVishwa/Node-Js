@@ -4,7 +4,7 @@ const { handlePostReqRes, handleGetReqRes , handlePatchReqRes, handleGetReqFromI
 const HomeRoute = express.Router()
 
 HomeRoute.get( "/" , handleGetReqRes )
-HomeRoute.get( "/:shortid" , handleGetReqFromID )
+HomeRoute.get( "/:shortid/" , handleGetReqFromID )
 HomeRoute.post( "/" , handlePostReqRes  )
 HomeRoute.patch( "/" , handlePatchReqRes )
 
