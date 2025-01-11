@@ -1,17 +1,21 @@
 const express = require("express");
-const { handleGetAllTasks, 
+const TaskRoute = express.Router();
+const { 
+    handleGetAllTasks, 
     handlePostTask, 
     handleReqResCompletedTasks, 
     PostCompletedTasks, 
     handleReqResDeleteTask,
-    GetRecentlyDeletedTask } = require("../Controller/taskFunction");
-const TaskRoute = express.Router();
+    GetRecentlyDeletedTask 
+} = require("../Controller/taskFunction");
 
 TaskRoute.get("/:user", handleGetAllTasks);
 TaskRoute.get("/:user/completedTasks" , handleReqResCompletedTasks)
+TaskRoute.get("/:user/delete", GetRecentlyDeletedTask);
+
 TaskRoute.post("/:user", handlePostTask);
 TaskRoute.post("/:user/:task(\\d+)", PostCompletedTasks);
+
 TaskRoute.delete("/:user/:task(\\d+)/delete", handleReqResDeleteTask);
-TaskRoute.get("/:user/:task(\\d+)/delete", GetRecentlyDeletedTask);
 
 module.exports = TaskRoute
