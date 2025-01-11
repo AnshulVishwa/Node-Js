@@ -44,13 +44,20 @@ async function PostCompletedTasks( req , res ) {
 }
 
 async function handleReqResDeleteTask( req , res ) {
-    const { user , task } = req.params
+    let { user , task } = req.params
     const validateUser = await TODO.findOne({"username" : user})
     if( !validateUser ) res.status(400).json({"msg" : "User Not Found"})
-    const validateTask = await TODO.findOne({"username" : user}).tasks
-    if( validateTask.length < task ) res.status(400).json({"msg" : "Task Not Found"})
-    await TODO.updateOne( { "username" : user } , { $pull : { "tasks" : validateTask[task] } } )
+    const validateTask = await TODO.findOne({"username" : user})
+    const toDeleteTask = validateTask.tasks[++task]
+    if( validateTask.tasks.length < task ) res.status(400).json({"msg" : "Task Not Found"})
+    await TODO.updateOne( { "username" : user } , { $pull : { "tasks" : toDeleteTask } } )
+    await TODO.updateOne( { "username" : user } , { $set : { "RecentlyDeletedTask" : toDeleteTask } } )
     res.status(200).json( { "status" : "Deleted Successfully" } )
+}
+
+async function GetRecentlyDeletedTask( req , res ) { 
+    const task = await TODO.findOne({"username" : req.params.user})
+    res.status(200).json( {"Found" : `${task.RecentlyDeletedTask}`} )
 }
 
 module.exports = {
@@ -58,5 +65,6 @@ module.exports = {
     handlePostTask,
     handleReqResCompletedTasks,
     PostCompletedTasks,
-    handleReqResDeleteTask
+    handleReqResDeleteTask,
+    GetRecentlyDeletedTask
 };
