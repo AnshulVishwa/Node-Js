@@ -5,7 +5,9 @@ const HomeRoute = express.Router()
 
 HomeRoute.get( "/" , handleGetReqRes )
 HomeRoute.get( "/:shortid/" , handleGetReqFromID )
+
 HomeRoute.post( "/" , handlePostReqRes  )
+
 HomeRoute.patch( "/" , handlePatchReqRes )
 
 module.exports = HomeRoute

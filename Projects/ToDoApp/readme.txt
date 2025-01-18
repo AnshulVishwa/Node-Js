@@ -22,9 +22,9 @@ Routes :-
         ~ Get all completedTasks of specific user ( "/task/:user/completedTasks" )
         ~ Get the RecentlyDeletedTask of any user ( "/task/:user/delete )
     # Post Route :
-        ~ Post new user
-        ~ Post new task
-        ~ Post new completed task
+        ~ Post new user ("/")
+        ~ Post new task ( "/task/:user )
+        ~ Post new completed task ( "/task/:user/completedTasks" )
     # Patch Route :
         ~ Update any field in User details
     # Delete Route :
