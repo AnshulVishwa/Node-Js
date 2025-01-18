@@ -8,6 +8,7 @@ app.use(express.json())
 const PORT = 3000
 MongoDB_Connection();
 
+app.use("/category" , HomeRoute)
 app.use("/" , HomeRoute)
 
 app.listen(PORT , () => console.log("Server Started at Port : " + PORT))

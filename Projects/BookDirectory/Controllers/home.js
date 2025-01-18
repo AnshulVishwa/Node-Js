@@ -20,7 +20,14 @@ async function HandlePostNewBook( req , res ){
     else res.status(200).json({result})
 }
 
+async function HandleGetBookByCategory( req , res ) {
+    const result = await BOOK.find({"category" : req.params.category})
+    if( !result || result.matchedCount == 0 ) res.status(400).json( { "error" : "Book not Found" } )
+    else res.status(200).json(result)
+}
+
 module.exports = {
     HandleGetAllBooks,
-    HandlePostNewBook
+    HandlePostNewBook,
+    HandleGetBookByCategory
 }
