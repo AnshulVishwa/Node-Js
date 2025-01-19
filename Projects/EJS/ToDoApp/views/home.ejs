@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {font-family: system-ui;}
+        h1{ text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>TODO app</h1>
+    <form method="POST" action="/home/post" >
+        <label>Enter your name</label>
+        <input type="text" placeholder="username" name="username">
+        <button type="submit">Create user</button>
+    </form>
+    <% if ( locals.id ) { %>
+        <h5>User Created <%= id %></h5>
+    <% } %>
+</body>
+</html>

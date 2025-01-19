@@ -1,0 +1,10 @@
+{
+  "common": {
+    "description": "dummy text."
+  },
+  "page": {
+    "/index.html": {
+      "title": "Index"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User</title>
+    <style>
+        body{ background: #212121; color: #ffffff; }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="card">
+            <div><%= user.username %></div>
+            <div><%= user.id %></div>
+            <div>Completed Tasks :
+                <ul>
+                    <% user.CompletedTasks.forEach( each => { %>
+                        <li>
+                            <input type="checkbox" name>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+            <div>All Tasks : 
+                <ul>
+                    <% user.tasks.forEach( each => { %>
+                        <li><%= each %></li>
+                    <% }) %></div>
+                </ul>
+            <div>Bin : <%= user.RecentlyDeletedTask%></div>
+        </div>
+    </main>
+</body>
+</html>
+

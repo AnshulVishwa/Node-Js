@@ -1,0 +1,16 @@
+{
+  "common": {
+    "description": "dummy text."
+  },
+  "page": {
+    "/index.html": {
+      "title": "Index"
+    },
+    "/about.html": {
+      "title": "About"
+    },
+    "/contact/index.html": {
+      "title": "Contact"
+    }
+  }
+}
