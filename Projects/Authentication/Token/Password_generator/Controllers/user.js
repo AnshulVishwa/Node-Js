@@ -7,11 +7,10 @@ async function HandleSignupUser(req, res) {
   
     try {
       const user = await USER.create({ username, email, password });
+
+      const token = SetUser(user); 
   
-      const sessionID = uuidv4();
-      SetUser(sessionID, user); 
-  
-      res.cookie("uid", sessionID); 
+      res.cookie("uid", token); 
       res.redirect("/"); 
   
     } catch (err) {
@@ -31,12 +30,11 @@ async function HandleLoginUser( req , res ) {
         "email" : email,
         "password" : password
     } )
-    if( !user || user == null ) res.render( "login" , {
+    if( !user || user == null ) return res.render( "login" , {
         error  : "Invalid email or password"
     } )
-    const sessionID = uuidv4()
-    SetUser( sessionID , user )
-    res.cookie("uid" , sessionID)
+    const token = SetUser(user); 
+    res.cookie("uid", token);  
     res.redirect("/")
 }
 

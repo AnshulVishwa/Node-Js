@@ -1,19 +1,20 @@
-const MapSessionID = new Map()
+const jwt = require("jsonwebtoken")
+const secretKey = "Anshul$^001!"
 
-function SetUser( id , user ){
-    return MapSessionID.set(id , user)
+function SetUser( user ){
+    return jwt.sign( {
+        _id : user._id,
+        username : user.username,
+        email  :user.email
+    } , secretKey )
 }
 
-function GetUser( id ){
-    return MapSessionID.get( id )
-}
-
-function IsLoggedIn( id ){
-    return MapSessionID.has(id)
+function GetUser( token ){
+    if( !token ) return null
+    return jwt.verify( token , secretKey )
 }
 
 module.exports = {
     SetUser,
-    GetUser,
-    IsLoggedIn
+    GetUser
 }
