@@ -3,7 +3,7 @@ const { GetUser } = require("../Service/auth");
 async function RestrictToLoginUserOnly( req , res , next ) {
     const token = req.cookies?.uid
     const user = GetUser(token)
-    if( !token || !user ){
+    if( !token || !user || user == null ){
         return res.render( "login" , {
             error : "You have to login to use this feature"
         } )
