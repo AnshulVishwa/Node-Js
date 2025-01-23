@@ -1,7 +1,6 @@
 const { USER } = require("../Model/user")
 const { v4 : uuidv4 } = require("uuid")
 const { SetUser } = require("../Service/auth")
-const { GeneratePassword } = require("../Service/pwd")
 
 async function HandleSignupUser( req , res ) {
     const { username , email , password } = req.body
@@ -13,11 +12,11 @@ async function HandleSignupUser( req , res ) {
     .then( ()=>{
         const sessionID = uuidv4()
         SetUser( sessionID , user )
-        GeneratePassword( 5 , true , true , true )
         res.cookie("uid" , sessionID)
         res.redirect("/")
     })
     .catch((err) => {
+        console.log(err)
         res.render("signup" , {
             error : "User already exist"
         })

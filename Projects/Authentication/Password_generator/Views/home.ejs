@@ -6,6 +6,22 @@
     <title>Home page</title>
 </head>
 <body>
-    <h1>Hello Home</h1>
+    <h1>Password Generate</h1>
+    <form method="POST" action="/pwd/post" >
+        <label>Length</label>
+        <input type="number" min = "0" max = "50" name="length"><br>
+        <label>Alphabets</label>
+        <input type="checkbox" name="alphabet"><br>
+        <label>Numbers</label>
+        <input type="checkbox" name="numbers"><br>
+        <label>Special characters</label>
+        <input type="checkbox" name="special_char"><br>
+
+        <% if (locals.pass) { %>
+            <span><%= pass%></span>
+        <% } %>
+
+        <button type="submit">Generate</button>
+    </form>
 </body>
 </html>
