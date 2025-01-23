@@ -19,13 +19,13 @@ const PWD = mongoose.model( "password_generator" , mongoose.Schema(
             type : Boolean,
             required : true,
         },
-        "special-characters" : {
+        "SpecialCharacters" : {
             type : Boolean,
             required : true,
         },
-        "created by" : {
+        "CreatedBy" : {
             type : mongoose.Schema.Types.ObjectId,
-            ref : "user-info"
+            ref : "user_infos"
         }
     }
 ) )

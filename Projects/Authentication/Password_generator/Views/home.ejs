@@ -22,6 +22,27 @@
         <% } %>
 
         <button type="submit">Generate</button>
+
+        <% if (locals.All) { %>
+            <table> 
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Length</th>
+                        <th>Password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% All.forEach((each , i) => { %>
+                        <tr>
+                            <td><%= i+1%></td>
+                            <td><%= each.length %></td>
+                            <td><%= each.password%></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %>
     </form>
 </body>
 </html>

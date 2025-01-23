@@ -2,26 +2,23 @@ const { USER } = require("../Model/user")
 const { v4 : uuidv4 } = require("uuid")
 const { SetUser } = require("../Service/auth")
 
-async function HandleSignupUser( req , res ) {
-    const { username , email , password } = req.body
-    const user = await USER.create({
-        username,
-        email,
-        password
-    })
-    .then( ()=>{
-        const sessionID = uuidv4()
-        SetUser( sessionID , user )
-        res.cookie("uid" , sessionID)
-        res.redirect("/")
-    })
-    .catch((err) => {
-        console.log(err)
-        res.render("signup" , {
-            error : "User already exist"
-        })
-    })
-}
+async function HandleSignupUser(req, res) {
+    const { username, email, password } = req.body;
+  
+    try {
+      const user = await USER.create({ username, email, password });
+  
+      const sessionID = uuidv4();
+      SetUser(sessionID, user); 
+  
+      res.cookie("uid", sessionID); 
+      res.redirect("/"); 
+  
+    } catch (err) {
+      console.log(err);
+      res.render("signup", { error: "User already exists" });
+    }
+  }
 
 async function HandleLoginUser( req , res ) {
     const { email , password } = req.body
