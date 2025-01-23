@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+</head>
+<body>
+    <h1>Password Generate</h1>
+    <form method="POST" action="/pwd/post" >
+        <label>Length</label>
+        <input type="number" min = "0" max = "50" name="length"><br>
+        <label>Alphabets</label>
+        <input type="checkbox" name="alphabet"><br>
+        <label>Numbers</label>
+        <input type="checkbox" name="numbers"><br>
+        <label>Special characters</label>
+        <input type="checkbox" name="special_char"><br>
+
+        <% if (locals.pass) { %>
+            <span><%= pass%></span>
+        <% } %>
+
+        <button type="submit">Generate</button>
+
+        <% if (locals.All) { %>
+            <table> 
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Length</th>
+                        <th>Password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% All.forEach((each , i) => { %>
+                        <tr>
+                            <td><%= i+1%></td>
+                            <td><%= each.length %></td>
+                            <td><%= each.password%></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %>
+    </form>
+</body>
+</html>
