@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Here this is form</h1>
+    <form method="post" action="/" >
+        <input name="username">
+        <button type="submit">Submit</button>
+    </form>
+    <% if ( locals.names ) { %>
+        <% names.forEach(each => { %>
+            <h3><%= each %></h3>
+        <% }) %>
+    <% } %>
+</body>
+</html>

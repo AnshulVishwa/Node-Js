@@ -7,6 +7,24 @@ async function GenerateAllPassword_of_ThisUser( Model , id ){
     } )
 }
 
+const nodemailer = require("nodemailer");
+
+let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: "anshulkb123456@gmail.com",
+        pass: "AnshulMain220505"
+    }
+});
+
+let mailOptions = {
+    from: "anshulkb123456@gmail.com",
+    to: "vidhiagrawal612@gmail.com",
+    subject: "Hello from Node.js!",
+    text: "This email was sent using Nodemailer."
+};
+
+
 async function HandleGeneratePassword( req , res ) {
     let { length , alphabet , numbers , special_char  } = req.body
     if( !length ) {return res.render("home" , {"error" : "Length is needed"}) }
@@ -17,6 +35,14 @@ async function HandleGeneratePassword( req , res ) {
     alphabet = ( !alphabet ) ? false : true 
     numbers = ( !numbers ) ? false : true
     special_char = ( !special_char ) ? false : true
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log("Email sent: " + info.response);
+        }
+    });
 
     await PWD.create({
         "password" : password,
