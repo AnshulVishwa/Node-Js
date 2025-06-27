@@ -1,2 +1,2 @@
-const fs = require("fs")
-
+const { getName } = require("./anshul");
+console.log(getName())
