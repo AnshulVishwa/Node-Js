@@ -2,9 +2,9 @@
   "name": "import-export",
   "version": "22.1.1",
   "description": "Learning Modules, Import Export",
-  "main": "vidhi.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node vidhi"
+    "start": "node index"
   },
   "repository": {
     "type": "git",
