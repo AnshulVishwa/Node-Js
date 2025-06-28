@@ -23,6 +23,7 @@
   "homepage": "https://github.com/AnshulVishwa/NodeJs#readme",
   "dependencies": {
     "colors": "^1.4.0",
+    "express": "^5.1.0",
     "fs": "^0.0.1-security"
   }
 }
