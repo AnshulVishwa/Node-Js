@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <% if (locals.err) { %>
+        <div><b><i><u><%= err%></u></i></b></div>
+    <% } %>
+    <form action="/user" method="post">
+        <input type="text" name="username">
+        <input type="text" name="dob">
+        <input type="text" name="rollNumber">
+        <button type="submit">Submit</button>
+    </form>
+    <% if (locals.users) { %>
+        <% users.forEach(user => { %>
+            <table>
+                <thead>Name</thead>
+                <thead>DOB</thead>
+                <thead>Roll Number</thead>
+                <tbody>
+                    <tr>
+                        <td><%= users.username %></td>
+                        <td><%= users.dob %></td>
+                        <td><%= users.rollNumber %></td>
+                    </tr>
+                </tbody>
+            </table>
+        <% }) %>
+    <% } %>
+</body>
+</html>
