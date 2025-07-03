@@ -14,8 +14,13 @@ async function handleCreateNewUser( req , res ) {
         dob,
         rollNumber
     } )
-    if( !result ) res.render( "home" , {users : req.session.users , err : "Some Internal Err Occured" } )
-    res.render( "home" , { users : [...req.session.users , { username , dob , rollNumber }] } )
+    const updatedUsers = (req.session.users || []).concat(result);
+    req.session.users = updatedUsers;
+
+    res.render("home", {
+        users: updatedUsers,
+        success: "User added successfully",
+    });
 }
 
 module.exports = {

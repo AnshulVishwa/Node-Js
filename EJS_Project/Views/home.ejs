@@ -16,16 +16,16 @@
         <button type="submit">Submit</button>
     </form>
     <% if (locals.users) { %>
-        <% users.forEach(user => { %>
+        <% users.forEach(each => { %>
             <table>
                 <thead>Name</thead>
+                <thead>Roll</thead>
                 <thead>DOB</thead>
-                <thead>Roll Number</thead>
                 <tbody>
                     <tr>
-                        <td><%= users.username %></td>
-                        <td><%= users.dob %></td>
-                        <td><%= users.rollNumber %></td>
+                        <td><%= each.username %></td>
+                        <td><%= each.rollNumber %></td>
+                        <td><%= each.dob %></td>
                     </tr>
                 </tbody>
             </table>
